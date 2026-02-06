@@ -1,0 +1,8 @@
+[project]
+name = "rubric-rater"
+version = "0.1.0"
+description = "Streamlit rubric rating app"
+requires-python = ">=3.10"
+dependencies = [
+  "streamlit>=1.33",
+]

@@ -1,0 +1,296 @@
+Best Jeans — U.S. Regional Fit Performance (Sell-in) Deck (PDF) | Grading Rubric v6 (0.0–100.0)
+
+What the grader has
+- Input data: the provided Excel workbook containing sell-in records by Fit (fit name), Gender, and account location (Region and/or State), with Units and Revenue fields.
+- Submission: a presentation delivered as a PDF (“deck”). A PPTX may also be provided, but grading must be based on what is readable in the PDF.
+
+Global grading rules (apply to all items)
+1) Grade ONLY what is legible in the PDF.
+   - If content exists in PPTX but is clipped/hidden/unreadable in the PDF, it does NOT count as “shown.”
+2) Recompute truth from the Excel (do not rely on any numbers printed in the rubric).
+   - Build these pivots (column names may vary):
+     a) Region × Gender × Fit: sum(Units), sum(Revenue)
+     b) Region × Gender totals: sum across fits
+     c) (If needed) National totals: Gender totals; Fit totals by gender
+   - Determine:
+     - “#1 by Units” = fit with max Units in the segment (ties allowed)
+     - “#1 by Revenue” = fit with max Revenue in the segment (ties allowed)
+3) Rounding tolerance:
+   - Units: must match displayed precision (exact if whole units; if shown as K/M, compare after rounding to that precision).
+   - Revenue: must match displayed precision (e.g., dollars vs $K vs $M).
+   - Shares/percentages: accept normal rounding consistent with the deck (e.g., 18.55% → 18.6%).
+4) Tie handling:
+   - If Excel shows a tie for #1, accept any tied fit as correct if the deck presents a single winner, OR accept an explicitly stated tie. No penalty for a documented tie-breaker used consistently.
+5) Revenue availability carve-out (segment-level):
+   - If Revenue is missing/unusable for a specific Region×Gender segment in the Excel AND the deck explicitly documents that limitation AND does not claim a revenue-based winner for that segment:
+     - Revenue-winner scoring for that segment can still earn full credit (see C38–C45).
+     - “Both-metrics readability” for that segment can still earn full credit for a units-only slide (see C22–C29).
+
+Point totals
+- Section A: 5.0 points
+- Section B: 28.0 points
+- Section C: 52.0 points
+- Section D: 15.0 points (visual/legibility ≤ 20% total)
+Total before penalties: 100.0 points
+Then apply penalties P1–P5 (negative points).
+
+A) DELIVERABLE FORMAT & CHECKABLE COMPLIANCE (5.0 points)
+A1) PDF deck is provided and opens/renders successfully (not corrupted; pages render). (4.0)
+- 4.0: PDF opens and pages render.
+- 0.0: no usable PDF deck.
+
+A2) File-handling compliance (checkable): no extraneous intermediate artifacts are PRESENT AT GRADING TIME in any locations explicitly prohibited by the task instructions. (1.0)
+- 1.0: no prohibited-location artifacts present at grading time.
+- 0.0: prohibited-location artifacts present.
+
+B) COVERAGE & STRUCTURE (28.0 points)
+Required regions included (2.0 each; 8.0 total)
+B3) Midwest region performance included and clearly labeled. (2.0)
+B4) South region performance included and clearly labeled. (2.0)
+B5) Northeast region performance included and clearly labeled. (2.0)
+B6) West Coast region performance included and clearly labeled. (2.0)
+
+Men/Women separation per region — enforce prompt strictly (2.0 each; 8.0 total)
+Scoring per region:
+- 2.0: Men and Women are on separate slides/pages for that region.
+- 0.0: combined on the same slide/page (even if separated by headings), OR one gender missing for that region.
+B7) Midwest: Men/Women on separate slides/pages. (2.0)
+B8) South: Men/Women on separate slides/pages. (2.0)
+B9) Northeast: Men/Women on separate slides/pages. (2.0)
+B10) West Coast: Men/Women on separate slides/pages. (2.0)
+
+Fit-level breakdown present for each region×gender view (1.0 each; 8.0 total)
+- 1.0: chart or table breaks results out by fit (≥2 fits shown).
+- 0.5: only the winner fit is shown (no comparative list/chart).
+- 0.0: no fit-level breakdown.
+B11) Midwest — Women fit breakdown present. (1.0)
+B12) Midwest — Men fit breakdown present. (1.0)
+B13) South — Women fit breakdown present. (1.0)
+B14) South — Men fit breakdown present. (1.0)
+B15) Northeast — Women fit breakdown present. (1.0)
+B16) Northeast — Men fit breakdown present. (1.0)
+B17) West Coast — Women fit breakdown present. (1.0)
+B18) West Coast — Men fit breakdown present. (1.0)
+
+Executive summary presence (4.0 total)
+B19) At least one executive-summary/overview slide exists that aggregates beyond a single Region×Gender fit list (e.g., national rollup, totals by region, totals by gender, multi-region comparison). (2.0)
+B20) Executive summary shows at least one aggregated Units total (any clear scope). (1.0)
+B21) Executive summary shows at least one aggregated Revenue total (any clear scope). (1.0)
+- If Revenue is truly unavailable in Excel and the deck clearly states this, award 1.0.
+
+C) DATA CORRECTNESS & QA (52.0 points)
+C22–C29) BOTH metrics readability per Region×Gender (1.0 each; 8.0 total)
+Grade ONLY what is legible in the PDF.
+Definition: “Readable” = interpretable without extreme compression, clipping, or overlap; a viewer can compare fits on that metric.
+Default scoring for segments with ≥3 fits in the dataset:
+- 1.0: Units AND Revenue are both readable for ≥3 fits on the slide/page (e.g., table columns with values; data labels; two separate charts; or a clearly labeled dual-axis chart).
+- 0.5: Both metrics appear, but only the winner’s Units or Revenue is readable OR one metric is visually non-interpretable for most fits (e.g., compressed series on a shared axis).
+- 0.0: Only one metric is readable (or neither).
+Sparse-segment carve-out:
+- If the Region×Gender segment contains <3 fits in the dataset, award 1.0 if both metrics are readable for ALL available fits and the limited fit count is clear from the slide/table context.
+Revenue-missing carve-out (segment-level):
+- If Revenue is missing/unusable for that segment and explicitly documented (and no revenue winner claimed), award 1.0 for units-only readability.
+
+C22) Midwest — Women both-metrics readability. (1.0)
+C23) Midwest — Men both-metrics readability. (1.0)
+C24) South — Women both-metrics readability. (1.0)
+C25) South — Men both-metrics readability. (1.0)
+C26) Northeast — Women both-metrics readability. (1.0)
+C27) Northeast — Men both-metrics readability. (1.0)
+C28) West Coast — Women both-metrics readability. (1.0)
+C29) West Coast — Men both-metrics readability. (1.0)
+
+C30–C37) Regional #1 fit by Units is correct (1.0 each; 8.0 total)
+Per item:
+- 1.0: deck clearly indicates (explicitly OR via a units-ranked visual/table) the top fit by Units, and it matches Excel.
+- 0.5: Units are shown and the true top fit is inferable and matches Excel, but the deck does not clearly label/rank it as “top by units.”
+- 0.0: incorrect or cannot be determined from what’s shown.
+C30) Midwest — Women unit-winner correct. (1.0)
+C31) Midwest — Men unit-winner correct. (1.0)
+C32) South — Women unit-winner correct. (1.0)
+C33) South — Men unit-winner correct. (1.0)
+C34) Northeast — Women unit-winner correct. (1.0)
+C35) Northeast — Men unit-winner correct. (1.0)
+C36) West Coast — Women unit-winner correct. (1.0)
+C37) West Coast — Men unit-winner correct. (1.0)
+
+C38–C45) Regional #1 fit by Revenue is correct (1.0 each; 8.0 total)
+Per item:
+- 1.0: revenue winner is either (a) explicitly called out OR (b) unambiguously inferable from a readable revenue column/values covering the shown fit list (even if the slide is sorted by units), and it matches Excel.
+- 0.5: revenue values exist but the revenue winner is ambiguous (e.g., partial/unlabeled subset where it’s unclear if the shown fits constitute the relevant “top” set), OR it is inferable but not unambiguous.
+- 0.0: incorrect, or revenue winner cannot be determined from what’s shown.
+Revenue-missing carve-out:
+- If Revenue is missing/unusable for that segment AND this is documented AND the deck does not claim a revenue winner, award 1.0.
+C38) Midwest — Women revenue-winner correct. (1.0)
+C39) Midwest — Men revenue-winner correct. (1.0)
+C40) South — Women revenue-winner correct. (1.0)
+C41) South — Men revenue-winner correct. (1.0)
+C42) Northeast — Women revenue-winner correct. (1.0)
+C43) Northeast — Men revenue-winner correct. (1.0)
+C44) West Coast — Women revenue-winner correct. (1.0)
+C45) West Coast — Men revenue-winner correct. (1.0)
+
+C46–C53) Winner value accuracy IF explicitly displayed (0.5 each; 4.0 total)
+Per item:
+- 0.5: winner fit’s Units AND Revenue are explicitly shown (callout/table) and match Excel within displayed rounding.
+- 0.25: winner fit is correct, but one/both of Units/Revenue are not explicitly readable as numbers in the PDF.
+- 0.0: values are explicitly shown but materially incorrect beyond rounding, or winner fit is wrong.
+C46) Midwest — Women winner values accurate if displayed. (0.5)
+C47) Midwest — Men winner values accurate if displayed. (0.5)
+C48) South — Women winner values accurate if displayed. (0.5)
+C49) South — Men winner values accurate if displayed. (0.5)
+C50) Northeast — Women winner values accurate if displayed. (0.5)
+C51) Northeast — Men winner values accurate if displayed. (0.5)
+C52) West Coast — Women winner values accurate if displayed. (0.5)
+C53) West Coast — Men winner values accurate if displayed. (0.5)
+
+C54–C61) Top-N integrity on each region×gender view (1.0 each; 8.0 total)
+Goal: ensure the fit list/ranking shown is truly top-performing, not arbitrary.
+Per item:
+- If slide claims “Top N by Units” (or “Top N by Revenue”): verify the listed Top N match Excel’s Top N for that metric/segment (ties acceptable).
+- If no explicit “Top N” claim but multiple fits are listed/sorted: use the metric indicated (e.g., Units axis/column) and verify the top 3 shown match Excel’s top 3 by that metric (ties acceptable).
+Scoring:
+- 1.0: passes the applicable check.
+- 0.5: #1 is correct but the rest of the top 3/top N does not match Excel (not explained by ties).
+- 0.0: #1 is wrong, or ranking metric cannot be identified.
+C54) Midwest — Women Top-N integrity. (1.0)
+C55) Midwest — Men Top-N integrity. (1.0)
+C56) South — Women Top-N integrity. (1.0)
+C57) South — Men Top-N integrity. (1.0)
+C58) Northeast — Women Top-N integrity. (1.0)
+C59) Northeast — Men Top-N integrity. (1.0)
+C60) West Coast — Women Top-N integrity. (1.0)
+C61) West Coast — Men Top-N integrity. (1.0)
+
+C62–C66) Executive summary correctness via KPI-pair sampling (2.0 each; 10.0 total)
+No dataset “answer key” allowed: recompute from Excel and compare to what the deck shows/derives.
+
+What qualifies as an executive-summary/overview slide for this section:
+- A slide/page that aggregates across multiple fits and is not a single Region×Gender detail page.
+- Examples: “Executive Summary,” “Overview,” “U.S. Rollup,” slides comparing multiple regions/genders, national rollups by gender, etc.
+
+KPI pair definition (must be a true aggregate):
+- A KPI pair is a clearly labeled segment total aggregating across multiple fits, showing Units and/or Revenue for a segment (e.g., a region total, a gender total, region×gender total, national total).
+- A KPI counts if either:
+  (a) explicitly printed as a labeled total, OR
+  (b) uniquely derivable from fully legible component totals on the SAME summary slide, with unambiguous scope/labels (e.g., a “total” that is clearly the sum of all four required regions listed on that slide).
+- Table parsing rule: each table row counts as at most one KPI pair; do NOT count multi-item lists inside a single cell as multiple KPI pairs.
+
+Selection rule (deterministic):
+- Starting with the first executive-summary/overview slide in deck order, scan summary slides top-to-bottom, left-to-right.
+- Collect up to 5 UNIQUE segment totals (by scope). Skip duplicates (if a segment total repeats later, only the first occurrence counts).
+- If fewer than 5 exist across all summary slides: score only those present; remaining KPI-pair items score 0.0. Do NOT backfill from region-detail slides.
+
+Scoring per KPI pair:
+- 2.0: both Units and Revenue are shown/derivable and correct within rounding.
+- 1.0: only Units OR only Revenue is shown/derivable and correct (or both shown but only one correct).
+- 0.0: materially incorrect beyond rounding, scope not clearly a segment total, or not shown/derivable per the definition above.
+C62) KPI pair #1 correct (selected by rule). (2.0)
+C63) KPI pair #2 correct. (2.0)
+C64) KPI pair #3 correct. (2.0)
+C65) KPI pair #4 correct. (2.0)
+C66) KPI pair #5 correct. (2.0)
+
+C67) Numeric QA beyond winners / auditability sampling (2.0)
+Purpose: catch errors in non-winner values without requiring a single specific design.
+
+Preferred sampling:
+- If ANY slides contain BOTH a chart and a table intended to represent the same segment and fit list:
+  - Sample any two such slides (recommended: first two in deck order).
+  - A sampled slide “passes” if:
+    - At least two fits match between chart and table on the metric(s) shown (values within rounding), OR
+    - If the chart lacks numeric values, rank order by the displayed metric is consistent (largest-to-smallest), regardless of whether the chart draws the largest bar at top or bottom.
+
+Fallback sampling (if no chart+table slides exist):
+- Sample any two Region×Gender slides that show numeric values for multiple fits (via tables or data labels).
+- For each sampled slide, verify at least two NON-winner fits match Excel values (Units and Revenue) within rounding.
+- If no slides provide numeric values beyond winners anywhere in the PDF: score 0.0 (not auditable).
+
+Scoring:
+- 2.0: both sampled slides pass
+- 1.0: exactly one sampled slide passes
+- 0.0: neither passes (or not auditable per fallback rule)
+
+C68) Shares/percentages baseline correctness (2.0)
+- If ANY shares/percentages are shown anywhere:
+  - 2.0: denominators match what the slide implies and reconcile within rounding:
+    - Region slides: shares must use Region×Gender totals unless explicitly labeled otherwise.
+    - National slides: shares must use the national total for the labeled scope (commonly by gender) unless explicitly labeled otherwise.
+  - 0.0: misleading denominator (e.g., Top-N subtotal presented like full-region share without labeling) OR shares contradict shown totals/values.
+- If no shares are shown anywhere: award 2.0.
+
+C69) Completeness / summation correctness (2.0)
+- If any slide explicitly implies an “All fits” breakdown AND shows a segment total:
+  - 2.0: component fits sum to the shown total within rounding.
+  - 0.0: does not sum and “All fits” is implied.
+- If only Top-N views are shown (not complete) OR no “total + all-fits breakdown” exists: award 2.0.
+
+D) VISUAL LEGIBILITY & PROFESSIONAL USABILITY (15.0 points; ≤20% total)
+D70) No clipping/overlap/off-canvas hiding key information in the PDF (6.0)
+Use these thresholds:
+- 6: No clipping/overlap/off-canvas hiding titles/axes/table columns/data labels on any slide.
+- 4: Minor clipping on ≤1 slide; does not hide required metrics (Units/Revenue by fit) or titles.
+- 2: Clipping on 2–3 slides OR hides one required metric in limited places.
+- 0: Recurring clipping across many slides OR prevents reading Units/Revenue by fit in multiple regions.
+Stacking rule with P3:
+- Grade Section C only on what’s legible in the PDF.
+- If penalty P3 is applied, set D70 = 6.0 (do not double-count clipping via D70).
+
+D71) Region×Gender slides are clearly titled/labeled with BOTH region and gender. (3.0)
+- 3.0: all required region×gender views unambiguous.
+- 0.0: missing/ambiguous region or gender labeling on one or more required views.
+
+D72) Metric labeling quality + Top-N vs All-fits labeling (0–3.0)
+Evaluate three elements (PDF-legible):
+1) Units vs Revenue clearly distinguished (reader can tell which numbers correspond to which metric)
+2) Revenue marked as currency (e.g., “$”, “Revenue ($)”)
+3) For Region×Gender slides that show a subset, slide indicates “Top N by Units” or “Top N by Revenue” (states N and metric) OR explicitly states “All fits”
+Scoring thresholds:
+- 3: all three elements present and clear
+- 2: exactly one element missing/unclear
+- 1: exactly two elements missing/unclear
+- 0: all three missing/unclear OR misleading
+
+Stacking with P4 (misleading multi-metric encoding):
+- If P4 is applied due to the encoding flaw, do NOT additionally deduct under D72 for the same encoding flaw. (D72 may still lose points for missing currency marking and/or missing Top-N vs All-fits labeling.)
+
+D73) Text and labels are legible at normal viewing (≈12pt equivalent; not dense/tiny to unusable). (2.0)
+- 2.0: generally readable
+- 1.0: some strain but usable
+- 0.0: frequently unreadable
+
+D74) Number formatting is understandable and internally consistent. (1.0)
+- Units shown as whole numbers (or clearly stated rounding)
+- Revenue uses a consistent convention ($, $K/$M, etc.)
+- Percentages include “%” when used
+
+NEGATIVE PENALTIES (deduct after positive points)
+General penalty rules:
+- Penalties are additive EXCEPT: If P1 applies, do not apply P2–P5 (P1 supersedes other penalties).
+
+P1) (-25) Materially incorrect or unsupported analysis
+Trigger if multiple critical winners/totals contradict Excel with no valid explanation, OR clear evidence the deck is not based on the provided dataset, OR required regions are materially misrepresented/substituted.
+
+P2) (-15) Misleading share math
+Trigger if shares use an incorrect denominator in a way likely to mislead (e.g., Top-N share presented as full-region share without labeling), OR shares contradict shown totals/values.
+
+P3) (-10) Pervasive illegibility (major usability failure)
+Apply ONLY if:
+- ≥4 of the 8 Region×Gender views have major clipping/overlap hiding required metrics, OR
+- both national rollups (if present) plus ≥2 Region×Gender views are unreadable.
+If P3 is applied: set D70 = 6.0 (no double-counting clipping via D70).
+
+P4) (-8) Misleading multi-metric encoding (with trigger + stacking guidance)
+Trigger if BOTH are true:
+- Units and Revenue are plotted/encoded on the same axis (or otherwise encoded) such that one metric cannot be visually compared across fits OR the encoding implies direct comparability of non-comparable units (units vs dollars), AND
+- This occurs on ≥4 of the 8 Region×Gender slides OR on both national rollup slides (if rollups exist).
+Acceptable examples (no penalty): separate charts per metric; a clearly labeled dual-axis chart; a table listing both metrics.
+Not acceptable examples (likely penalty if widespread): units and dollars plotted on a single axis without normalization/secondary axis so one series becomes non-interpretable; revenue line without a revenue axis scale while implying comparability.
+Stacking: If P4 is applied for this root issue, do not additionally deduct under D72 for the same encoding flaw. C22–C29 may still score lower based on what is readable/decision-usable.
+
+P5) (-4) Misleading sell-in vs sell-through terminology
+Trigger if the deck labels the sell-in dataset in a way that implies sell-through (e.g., “Units Sold”) without clarifying definition, and this could plausibly mislead interpretation.
+No penalty if the deck uses “Units Ordered,” “Sell-in Units,” or explicitly defines what “Units Sold” means in this deck (sell-in).
+
+Score reporting requirement
+- Report the final score on a 0–100 scale (optionally also include a normalized score in parentheses).
