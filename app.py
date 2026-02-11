@@ -62,6 +62,7 @@ def rtf_to_text(rtf: str) -> str:
 
 def parse_rubric_items(
     text: str,
+    mode: str = "standard",
 ) -> Tuple[
     List[RubricItem],
     Dict[str, str],
@@ -73,13 +74,27 @@ def parse_rubric_items(
     sections: Dict[str, str] = {}
     range_blocks: List[RangeBlock] = []
     inherited_scoring: Dict[str, Tuple[List[str], str]] = {}
-    item_pattern = re.compile(
-        r"^([A-Z]\d{1,3}|\d+(?:\.\d+)?)\)\s*(.+?)\s*\((\d+(?:\.\d+)?)(?:\s*points?)?\)\s*$"
-    )
+    if mode == "alternate":
+        # Accept: A1) (4.0) Description  OR  1.1 (4.0) Description
+        item_pattern = re.compile(
+            r"^([A-Z]\d{1,3}|\d+(?:\.\d+)?)[)]?\s*\((\d+(?:\.\d+)?)(?:\s*points?|pts)?\)\s*(.+?)\s*$"
+        )
+    else:
+        # Accept: A1) Description (4.0)  OR  1.1 Description (4.0)
+        item_pattern = re.compile(
+            r"^([A-Z]\d{1,3}|\d+(?:\.\d+)?)[)]?\s*(.+?)\s*\((\d+(?:\.\d+)?)(?:\s*points?|pts)?\)\s*$"
+        )
     section_pattern = re.compile(r"^([A-Z])\)\s*(.+)$")
     range_pattern = re.compile(
         r"^([A-Z]?\d{1,3}(?:\.\d{1,3})?)\s*[–-]\s*([A-Z]?\d{1,3}(?:\.\d{1,3})?)\)\s*(.+)$"
     )
+    score_bullet_line = re.compile(
+        r"^(?:[-•]\s*)?-?\s*\d+(?:\.\d+)?\s*:\s*.+$"
+    )
+    item_head_pattern = re.compile(
+        r"^([A-Z]\d{1,3}|\d+(?:\.\d+)?)[)]?\s*(.+)$"
+    )
+    trailing_points_pattern = re.compile(r"\((\d+(?:\.\d+)?)\)\s*$")
 
     lines = [line.rstrip() for line in text.splitlines()]
     idx = 0
@@ -89,6 +104,20 @@ def parse_rubric_items(
     pending_group_has_scores = False
     active_group_bullets: List[str] = []
     active_group_details = ""
+
+    def _should_treat_numeric_as_section(
+        code: str, description: str, line_index: int
+    ) -> bool:
+        if not re.match(r"^\d+$", code):
+            return False
+        lookahead_limit = 8
+        for j in range(line_index + 1, min(len(lines), line_index + 1 + lookahead_limit)):
+            candidate = lines[j].strip()
+            if not candidate:
+                continue
+            if re.match(rf"^{re.escape(code)}\.\d+", candidate):
+                return True
+        return False
     while idx < len(lines):
         line = lines[idx].strip()
         if not line:
@@ -148,16 +177,60 @@ def parse_rubric_items(
 
         item_match = item_pattern.match(line)
         if not item_match:
-            if not seen_any_item:
-                preamble_lines.append(line)
-            else:
-                pending_group_lines.append(line)
-                if re.match(r"^-?\s*\d+(?:\.\d+)?\s*:\s*", line.strip()):
-                    pending_group_has_scores = True
-            idx += 1
-            continue
+            # Fallback: item line without points, but points appear in a following line.
+            head_match = item_head_pattern.match(line)
+            if head_match and not re.fullmatch(r"\d+", head_match.group(1)):
+                code = head_match.group(1)
+                description = head_match.group(2).strip()
+                max_points = None
+                lookahead = idx + 1
+                while lookahead < len(lines):
+                    peek = lines[lookahead].strip()
+                    if not peek:
+                        lookahead += 1
+                        continue
+                    if (
+                        item_pattern.match(peek)
+                        or section_pattern.match(peek)
+                        or range_pattern.match(peek)
+                    ):
+                        break
+                    points_match = trailing_points_pattern.search(peek)
+                    if points_match:
+                        max_points = points_match.group(1)
+                        break
+                    lookahead += 1
+                if max_points is not None:
+                    item_match = (code, description, max_points)
+                else:
+                    item_match = None
+            if not item_match:
+                if not seen_any_item:
+                    preamble_lines.append(line)
+                else:
+                    pending_group_lines.append(line)
+                    if score_bullet_line.match(line.strip()):
+                        pending_group_has_scores = True
+                idx += 1
+                continue
 
-        code, description, max_points = item_match.groups()
+        if isinstance(item_match, tuple):
+            code, description, max_points = item_match
+        else:
+            if mode == "alternate":
+                code, max_points, description = item_match.groups()
+            else:
+                code, description, max_points = item_match.groups()
+
+        if _should_treat_numeric_as_section(code, description, idx):
+            sections[code] = description.strip()
+            idx += 1
+            seen_any_item = True
+            pending_group_lines = []
+            pending_group_has_scores = False
+            active_group_bullets = []
+            active_group_details = ""
+            continue
         seen_any_item = True
         if pending_group_has_scores:
             group_text = "\n".join(pending_group_lines).strip()
@@ -251,6 +324,12 @@ col_left, col_right = st.columns([2, 1])
 with col_left:
     upload = st.file_uploader("Upload rubric file", type=["rtf", "txt"])
     use_sample = st.checkbox("Use bundled RubricTest.rtf", value=False)
+    st.selectbox(
+        "Parser mode",
+        options=["standard", "alternate"],
+        help="Standard: A1) Description (4.0). Alternate: A1) (4.0) Description.",
+        key="parse_mode",
+    )
 
 items: List[RubricItem] = []
 sections: Dict[str, str] = {}
@@ -263,13 +342,6 @@ if use_sample and not upload:
         with open("RubricTest.rtf", "rb") as handle:
             content = _decode_bytes(handle.read())
             raw_text = rtf_to_text(content)
-            (
-                items,
-                sections,
-                range_blocks,
-                inherited_scoring,
-                preamble_text,
-            ) = parse_rubric_items(raw_text)
     except FileNotFoundError:
         st.error("RubricTest.rtf not found in the app folder.")
 elif upload:
@@ -278,8 +350,40 @@ elif upload:
         raw_text = rtf_to_text(content)
     else:
         raw_text = content
+ 
+override_text = st.session_state.get("override_text", "")
+use_override = st.session_state.get("use_override", False)
+parse_mode = st.session_state.get("parse_mode", "standard")
+
+if raw_text:
+    with st.expander("Extracted text preview (editable)"):
+        edited_text = st.text_area(
+            "Edit extracted text before parsing",
+            value=override_text or raw_text,
+            height=300,
+        )
+        col_apply, col_reset = st.columns([1, 1])
+        with col_apply:
+            if st.button("Parse edited text"):
+                st.session_state["override_text"] = edited_text
+                st.session_state["use_override"] = True
+                use_override = True
+        with col_reset:
+            if st.button("Reset to original"):
+                st.session_state["override_text"] = ""
+                st.session_state["use_override"] = False
+                st.session_state["parse_mode"] = "standard"
+                use_override = False
+
+effective_text = (
+    st.session_state.get("override_text", "")
+    if use_override
+    else raw_text
+)
+if effective_text:
     items, sections, range_blocks, inherited_scoring, preamble_text = parse_rubric_items(
-        raw_text
+        effective_text,
+        mode=st.session_state.get("parse_mode", "standard"),
     )
 
 if preamble_text:
@@ -337,7 +441,7 @@ def _extract_score_bullets(text: str) -> Tuple[List[str], str]:
         return [], ""
     bullets: List[str] = []
     rest_lines: List[str] = []
-    score_line = re.compile(r"^-?\s*(\d+(?:\.\d+)?)\s*:\s*(.+)$")
+    score_line = re.compile(r"^(?:[-•]\s*)?-?\s*(\d+(?:\.\d+)?)\s*:\s*(.+)$")
     for line in text.splitlines():
         match = score_line.match(line.strip())
         if match:
@@ -346,6 +450,21 @@ def _extract_score_bullets(text: str) -> Tuple[List[str], str]:
             rest_lines.append(line)
     rest = "\n".join([line for line in rest_lines if line.strip()]).strip()
     return bullets, rest
+
+
+def _extract_score_values(bullets: List[str]) -> List[float]:
+    values: List[float] = []
+    seen: set[float] = set()
+    for bullet in bullets:
+        match = re.match(r"^-?\s*(\d+(?:\.\d+)?)\s*:", bullet.strip())
+        if not match:
+            continue
+        value = float(match.group(1))
+        if value in seen:
+            continue
+        seen.add(value)
+        values.append(value)
+    return values
 
 
 for section, section_items in grouped.items():
@@ -378,6 +497,7 @@ for section, section_items in grouped.items():
             if display_bullets:
                 st.markdown("\n".join([f"- {bullet}" for bullet in display_bullets]))
             st.caption(f"Max points: {item.max_points:g}")
+            score_options = _extract_score_values(display_bullets)
             all_points = st.radio(
                 f"{item.code} rating mode",
                 options=["All points", "Adjust score"],
@@ -388,14 +508,25 @@ for section, section_items in grouped.items():
                 score = float(item.max_points)
                 explanation = ""
             else:
-                score = st.number_input(
-                    f"{item.code} score",
-                    min_value=0.0,
-                    max_value=float(item.max_points),
-                    value=float(item.max_points),
-                    step=0.25,
-                    key=f"score_{item.code}",
-                )
+                if score_options:
+                    default_idx = 0
+                    if float(item.max_points) in score_options:
+                        default_idx = score_options.index(float(item.max_points))
+                    score = st.selectbox(
+                        f"{item.code} score",
+                        options=score_options,
+                        index=default_idx,
+                        key=f"score_{item.code}",
+                    )
+                else:
+                    score = st.number_input(
+                        f"{item.code} score",
+                        min_value=0.0,
+                        max_value=float(item.max_points),
+                        value=float(item.max_points),
+                        step=0.25,
+                        key=f"score_{item.code}",
+                    )
                 explanation = st.text_area(
                     f"{item.code} explanation",
                     placeholder="Add a short justification for deducted points.",
