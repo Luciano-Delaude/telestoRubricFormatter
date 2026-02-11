@@ -74,11 +74,11 @@ def parse_rubric_items(
     range_blocks: List[RangeBlock] = []
     inherited_scoring: Dict[str, Tuple[List[str], str]] = {}
     item_pattern = re.compile(
-        r"^([A-Z]\d{1,3})\)\s*(.+?)\s*\((\d+(?:\.\d+)?)\)\s*$"
+        r"^([A-Z]\d{1,3}|\d+(?:\.\d+)?)\)\s*(.+?)\s*\((\d+(?:\.\d+)?)(?:\s*points?)?\)\s*$"
     )
     section_pattern = re.compile(r"^([A-Z])\)\s*(.+)$")
     range_pattern = re.compile(
-        r"^([A-Z]\d{1,3})\s*[–-]\s*([A-Z]?\d{1,3})\)\s*(.+)$"
+        r"^([A-Z]?\d{1,3}(?:\.\d{1,3})?)\s*[–-]\s*([A-Z]?\d{1,3}(?:\.\d{1,3})?)\)\s*(.+)$"
     )
 
     lines = [line.rstrip() for line in text.splitlines()]
@@ -110,7 +110,7 @@ def parse_rubric_items(
         range_match = range_pattern.match(line)
         if range_match:
             start_code, end_code, title = range_match.groups()
-            if not re.match(r"^[A-Z]", end_code):
+            if re.match(r"^[A-Z]", start_code) and not re.match(r"^[A-Z]", end_code):
                 end_code = f"{start_code[0]}{end_code}"
             header = f"{start_code}–{end_code}) {title.strip()}"
             detail_lines: List[str] = []
@@ -204,10 +204,18 @@ def load_rubric_from_upload(upload: io.BytesIO, name: str) -> List[RubricItem]:
     return items
 
 
+def _section_key(code: str) -> str:
+    if re.match(r"^[A-Z]", code):
+        return code[0]
+    if "." in code:
+        return code.split(".", 1)[0]
+    return code
+
+
 def group_items(items: List[RubricItem]) -> Dict[str, List[RubricItem]]:
     grouped: Dict[str, List[RubricItem]] = {}
     for item in items:
-        section = item.code[0]
+        section = _section_key(item.code)
         grouped.setdefault(section, []).append(item)
     return grouped
 
@@ -218,6 +226,10 @@ def format_output(
     explanations: Dict[str, str],
 ) -> str:
     lines: List[str] = []
+    total_obtained = sum(scores.get(item.code, 0.0) for item in items)
+    total_possible = sum(item.max_points for item in items)
+    lines.append(f"Total: {total_obtained:g}/{total_possible:g}")
+    lines.append("")
     for item in items:
         score = scores.get(item.code, 0.0)
         explanation = explanations.get(item.code, "").strip()
@@ -289,7 +301,23 @@ st.caption(f"Detected {len(items)} rubric items across {len(grouped)} sections."
 st.divider()
 
 def _code_parts(code: str) -> Tuple[str, int]:
-    return code[0], int(code[1:])
+    if re.match(r"^[A-Z]", code):
+        numeric = re.sub(r"\D", "", code[1:])
+        return code[0], int(numeric or 0)
+    if "." in code:
+        section, rest = code.split(".", 1)
+        numeric = re.sub(r"\D", "", rest)
+        return section, int(numeric or 0)
+    numeric = re.sub(r"\D", "", code)
+    return numeric or code, 0
+
+
+def _section_key(code: str) -> str:
+    if re.match(r"^[A-Z]", code):
+        return code[0]
+    if "." in code:
+        return code.split(".", 1)[0]
+    return code
 
 
 def _find_range_block(code: str) -> RangeBlock | None:
@@ -378,9 +406,13 @@ for section, section_items in grouped.items():
 
 st.divider()
 output_text = format_output(items, scores, explanations)
+total_obtained = sum(scores.get(item.code, 0.0) for item in items)
+total_possible = sum(item.max_points for item in items)
+total_display = f"{total_obtained:g}/{total_possible:g}"
 
 with col_right:
     st.subheader("Output")
+    st.metric("Total score", total_display)
     st.text_area("Formatted output", value=output_text, height=400)
     st.download_button(
         "Download output",
