@@ -1,0 +1,272 @@
+County Parks & Recreation + Chamber of Commerce Partnership Presentation — Grading Rubric (0.0–100.0)
+
+What is being graded
+A concise PowerPoint presentation intended for a County Recreation Advisory Board to persuade them that the County Parks & Recreation department should pursue a first community partnership with the local Chamber of Commerce.
+
+The task requires (at minimum):
+1) An overview of why the department should pursue community partnerships
+2) What Chambers of Commerce generally do
+3) Reasons a Chamber would make a strong first partner
+4) Potential direct and indirect benefits of the partnership
+5) A concise deck of 8–10 slides (inclusive)
+6) Slide-by-slide discussion is encouraged (the deck should invite discussion on each slide)
+
+Score reporting (important)
+- Report the final score as a 0–100 value (example: “96/100”), not as a 0–1 normalized value.
+- If you need a normalized score for a separate system, compute it as (final_score / 100), but still report X/100.
+
+How to score
+- Points = A + B + C + D + E + F (maximum 100.0).
+- Then subtract penalties N1–N7 that are clearly triggered (maximum total deductions across all penalties = 50).
+- Final score = max(0.0, points − penalties).
+
+Preamble rules for consistent grading
+1) Visibility/legibility gate (applies to B–E)
+- Only content that is visible and readable in slideshow view counts for scoring in sections B–E.
+- If key text is truncated, hidden, off-slide, or unreadably small/low-contrast, treat that content as “not included” for B–E (even if it exists in the file’s underlying text).
+
+2) Non-overlap rule (avoid double-penalizing)
+- A1 is file-open/format only (do not judge layout/legibility in A1).
+- Readability/layout issues are scored in F.
+- If overlap/clipping hides required content: reduce credit in B–E (visibility gate) AND score the layout failure in F2. Do not additionally penalize beyond that, except N6 if the deck is truly meeting-unusable.
+
+3) Submission hygiene (N7) grader procedure (to avoid false positives)
+- Before generating any grader-created artifacts (renders/screenshots), record/list the contents of the designated submission area.
+- Render slides to a grader-controlled temporary location (not the submission area).
+- Apply N7 only for artifacts that were present prior to grading or that the submitter explicitly states they created.
+- Saving the final PPTX in the designated submission folder is allowed and is not, by itself, a hygiene violation.
+
+Recommended inspection method (practical)
+- Open the PowerPoint in slideshow mode and/or render all slides to images.
+- Count slides.
+- Verify required content is present and readable.
+- Verify discussion invitations on content slides (A3).
+- Check readability/layout (F).
+- Apply penalties only when clearly triggered.
+
+A) Deliverable format & structure (20 points)
+
+A1 (10) Valid PowerPoint file provided; opens
+- 10: A .pptx (or .ppt) is provided and opens successfully in a standard tool.
+- 5: Opens only after repair/recovery prompts but remains viewable/editable.
+- 0: No PowerPoint provided (e.g., outline only, link only), wrong format only, or file does not open.
+
+A2 (4) Slide count meets the “8–10 slides” requirement
+- 4: 8–10 slides inclusive.
+- 2: 7 or 11 slides.
+- 0: ≤6 or ≥12 slides.
+
+A3 (5) Discussion invitation on every content slide (title slide optional; must be visible/readable)
+Definitions:
+- “Title slide” = the first slide if it clearly functions as a cover/title (e.g., title/purpose only). If there is no clear title slide, treat all slides as content slides.
+- “Discussion invitation” = either:
+  a) a visible on-slide prompt/callout/question (e.g., “Discussion question: …”, “Board prompt: …”, “Consider: …”), OR
+  b) at least one bullet on that slide is phrased as a question (ends with “?”).
+Visibility requirement:
+- Tiny, faint, or otherwise unreadable prompts do not count.
+Scoring (monotonic: adding visible prompts cannot reduce the score):
+- 5: 100% of content slides have a visible, readable discussion invitation.
+- 3: At least 80% of content slides have a visible, readable discussion invitation.
+- 2: 100% of content slides have discussion invitations, but some/all are in speaker notes only (not visible on-slide).
+- 1: Discussion invitations appear on some slides (visible and/or notes) but coverage is <80% of content slides.
+- 0: No meaningful discussion invitations.
+
+A4 (1) Skimmable slide structure (not a font/layout check)
+- 1: Slides are primarily bullets/short phrases (discussion-friendly); no paragraph blocks that prevent slide-by-slide discussion.
+- 0: Multiple slides are dense narrative paragraphs or otherwise unskimmable.
+
+B) Core content coverage required by the task (40 points) — apply visibility/legibility gate
+
+B1 (10) Why Parks & Rec should pursue community partnerships (department-specific rationale)
+Full credit requires at least 3 distinct, Parks & Rec–relevant reasons (not just generic “partnerships are good”).
+- 10: 3+ clear, department-relevant reasons.
+- 7: 2–3 reasons, somewhat department-relevant but partially generic.
+- 4: 1–2 reasons and/or mostly generic.
+- 1: Very vague mention without real rationale.
+- 0: Missing (or unreadable per visibility gate).
+
+B2 (10) What Chambers of Commerce generally do (accurate, neutral overview)
+Full credit requires an accurate and neutral description (no political endorsements; avoid overclaiming).
+- 10: Accurate overview with 3+ typical functions (e.g., convening/networking, promotion/communications, community initiatives/member services; advocacy may be mentioned neutrally).
+- 7: Mostly accurate but missing important typical functions or includes mild overstatement.
+- 4: Vague or partially inaccurate.
+- 1: Major inaccuracies that could mislead the Board.
+- 0: Missing (or unreadable).
+
+B3 (10) Why the Chamber is a strong first partner (plausible, locally relevant, risk-aware)
+Full credit requires at least 3 plausible reasons and a clear “why this is a good first partner” argument that fits a skeptical board (without overpromising).
+- 10: 3+ plausible, locally relevant reasons + risk-aware framing (e.g., prudent first step, low complexity, clear value proposition).
+- 7: 2–3 reasons; some risk awareness, but weaker “why first” logic or slightly overstated claims.
+- 4: 1–2 reasons; largely generic or not tailored to skepticism.
+- 1: Very weak/unsupported justification.
+- 0: Missing (or unreadable).
+
+B4 (5) Potential direct benefits to Parks & Rec (department-level; concrete)
+- 5: At least 3 concrete direct benefits.
+- 3: 2 direct benefits and/or benefits are somewhat vague.
+- 1: 1 direct benefit only, vague.
+- 0: Missing (or unreadable).
+
+B5 (5) Potential indirect benefits to the County/community (concrete)
+- 5: At least 2 plausible indirect benefits.
+- 3: 1 indirect benefit (or 2 but very vague).
+- 0: Missing (or unreadable).
+
+C) Persuasion for a skeptical board & basic risk-handling (16 points) — apply visibility/legibility gate
+Note: This section rewards practical reassurance appropriate to a skeptical public-sector advisory board. It is intentionally “basic” and should not require a fully developed legal/procurement framework. Do not double-count the same safeguard across items where the rubric says not to.
+
+C1 (5) Acknowledges skepticism and proposes a credible low-risk way to try
+- 5: Explicitly recognizes partnership concerns and proposes a credible low-risk approach (e.g., pilot/phased start, guardrails, oversight/evaluation before expansion).
+- 3: Skepticism/risk acknowledged but mitigation approach is vague or incomplete.
+- 1: Only implicit risk awareness with little mitigation.
+- 0: No acknowledgment of skepticism or no mitigation approach.
+
+C2 (3) Mission drift/commercialization limits + preserving public control (WHAT this prevents)
+Definition (counts for C2):
+- Limits on commercialization/branding and safeguards that preserve County control of public programs.
+Examples that DO count for C2:
+- Recognition-only acknowledgments, signage/branding limits, no naming rights, County retains control over programming/pricing/eligibility.
+Examples that do NOT count for C2 (they belong in C3b instead):
+- “Pre-approval workflow” for messaging, designated spokesperson/PIO, complaint/escalation process.
+Scoring:
+- 3: At least 2 concrete C2 safeguards are stated.
+- 2: Exactly 1 concrete C2 safeguard.
+- 1: Vague “mission first / public control” statement without a mechanism.
+- 0: Missing.
+
+C3a (2) Explicit nonpartisan/programmatic-only statement
+- 2: Clearly states no political advocacy/endorsements as part of the partnership (or equivalent explicit neutrality statement).
+- 1: Implied neutrality but not explicit.
+- 0: Missing or contradictory.
+
+C3b (1) Communications process controls (HOW messaging is controlled) — do not double-count C2 items here
+Definition (counts for C3b):
+- Process/mechanism controls for communications and branding approvals.
+Examples that DO count for C3b:
+- Pre-approval workflow for messaging/branding, designated spokesperson/PIO, formal complaint/escalation path, logo use approval process.
+Examples that do NOT count for C3b:
+- Recognition-only rules, signage limits, no naming rights (these are C2).
+Non-overlap note:
+- If a safeguard fits C2, do not count it again under C3b.
+Scoring:
+- 1: At least one C3b control is included.
+- 0: Missing.
+
+C4 (3) Procurement/ethics/fairness (modest weight; partial credit for general language)
+- 3: Includes 2+ concrete fairness/ethics safeguards (e.g., open opportunity/open call or similar fairness mechanism, no quid pro quo, transparency, conflict-of-interest handling, donations/sponsorship processed under public policy).
+- 2: Includes 1 concrete safeguard beyond “we’ll follow rules.”
+- 1: Only generic “we will follow County rules/policies.”
+- 0: Missing OR implies pay-to-play, exclusivity, or preferential treatment.
+
+C5a (1) Workload realism (clarified scoring: bounded scope OR staffing/time acknowledgment earns credit)
+Award credit if EITHER is present (readable on-slide):
+- Bounded scope examples: time-limited pilot (e.g., “3–6 months” or “one season”), cap on number of events/activities, limited deliverables, phased rollout.
+OR
+- Explicit staffing/time acknowledgment examples: named liaison/point of contact, defined staff-hour cap, realistic statement about staff capacity/roles.
+Scoring:
+- 1: At least one qualifying bounded-scope or staffing/time realism statement is present.
+- 0: Missing.
+
+C5b (1) Volunteer/participant safety & liability mention
+- 1: Mentions at least one safety/liability control (e.g., waivers, safety briefings, supervision, background checks where youth are involved, insurance/standard procedures).
+- 0: Missing.
+
+D) Success metrics & evaluation (6 points) — apply visibility/legibility gate
+Clarification (metrics): Credit is for clear, measurable indicators (what will be tracked), not numeric targets. Placeholders for numbers are acceptable if the indicators themselves are concrete and measurable.
+
+D1 (4) Measurable indicators (what will be tracked)
+Categories (examples): participation/reach; quality/safety; equity/access; resources (staff time, in-kind, cost avoidance).
+- 4: Indicators cover 3–4 categories.
+- 2: Indicators cover exactly 2 categories.
+- 1: Indicators cover exactly 1 category.
+- 0: No measurable indicators.
+
+D2 (2) Report-back plan to the Advisory Board
+- 2: Clear plan to report results to the Board (e.g., written results plus a go/adjust/no-go recommendation).
+- 1: Mentions evaluation but unclear how/when Board is informed.
+- 0: Missing.
+
+E) Decision & next steps (6 points) — apply visibility/legibility gate
+
+E1 (3) Explicit authorization/decision ask to the Board
+- 3: Clear “what we are asking you to approve/support” statement.
+- 1: Ask is implied but not explicit.
+- 0: Missing.
+
+E2 (3) Concrete next steps and/or near-term timeline
+- 3: 2+ concrete next steps and/or a near-term timeline.
+- 2: 1 concrete next step plus general next steps.
+- 1: Vague next steps only.
+- 0: Missing.
+
+F) Readability & professional usability (12 points; visual checks ≤20% of total)
+Score using slideshow view or rendered images.
+
+F1 (6) Legibility at meeting distance
+- 6: Comfortable to read; good contrast; not overly dense.
+- 4: Mostly readable; a few crowded or borderline slides.
+- 2: Many slides hard to read (small text, low contrast, or excessive density).
+- 0: Largely unreadable.
+
+F2 (4) Layout integrity (clipping/overlap/overflow/alignment)
+Threshold guide:
+- Minor issues on 1–2 slides = 2–3 points
+- Issues on 3–4 slides OR repeated overlaps that hide content = 1 point
+- Widespread issues (>50% of slides) = 0 points
+Scoring:
+- 4: No meaningful clipping/overlap/truncation; no overflow outside intended containers; consistent margins/alignment.
+- 2–3: Minor layout problems on 1–2 slides; comprehension intact.
+- 1: Layout problems on 3–4 slides or repeated hiding of content.
+- 0: Widespread layout failures.
+
+F3 (1) Plain language; acronyms defined on first use
+- 1: Plain-language suitable for a mixed board audience; acronyms are defined on first use.
+- 0: Frequent jargon/undefined acronyms hinder comprehension.
+
+F4 (1) No obvious placeholder/template text left in final deck
+- 1: No visible placeholders (e.g., “Insert title,” “Month YYYY,” “Click to add text”).
+- 0: Placeholder/template text remains visible.
+
+Negative penalties (deduct after A–F; max total deductions = 50)
+Apply only when clearly triggered. Do not double-penalize the same readability/layout issue already captured by F, except N6 for extreme meeting-unusable decks.
+
+N1 (-30) No functioning PowerPoint delivered
+Triggers: file missing, link-only submission (e.g., a web link without PPTX), wrong format only, or the PowerPoint cannot be opened.
+
+N2 (-3) Slide count far outside requested range
+Trigger: ≤5 slides OR ≥13 slides.
+(Note: This is intentionally additional to A2 for extreme noncompliance.)
+
+N3 (-4) Political advocacy/endorsements or partisan messaging
+Triggers: endorsing/opposing candidates/parties/ballot measures; urging lobbying/partisan action; partisan slogans.
+
+N4 (-4) Quid pro quo / exclusivity / preferential treatment implied
+Triggers: pay-to-play, exclusive access, “members only” participation, or sponsorship implying decision influence or preferential treatment.
+
+N5 (-4) Privacy/IT safety violation
+Triggers: proposes sharing participant personally identifiable information (PII) with partner without protection; proposes partner access to internal County systems/accounts/data beyond public-facing materials.
+
+N6 (-3) Severe multi-slide legibility failure (meeting-unusable)
+Apply only in extreme cases (in addition to F), such as:
+- >50% of slides unreadable/clipped in a way that prevents use in a meeting, OR
+- Consistently tiny text across many slides (appears ~≤18pt equivalent), OR
+- Extremely low contrast across many slides.
+
+N7 (-2) Submission hygiene: prohibited intermediate outputs (tightened to avoid false positives)
+Trigger only if submitter-created non-deliverable artifacts:
+- Are bundled alongside the final deliverable in the designated submission area, OR
+- Are placed in any location(s) the assignment explicitly prohibits for intermediate outputs.
+Do NOT penalize:
+- The final PPTX being saved in the designated submission folder (allowed).
+- Grader-generated temporary files created during inspection (e.g., slide renders produced by the grader).
+Required grader procedure for applying N7:
+- Perform a pre-check by listing the designated submission area contents before creating any grader artifacts.
+- Render/inspect using a grader-controlled temp location (not the submission area).
+- Penalize only artifacts present prior to grading or those the submitter explicitly claims to have created.
+
+Edge-case guidance (for unambiguous scoring)
+- Case A: 9 slides; no explicit “Discussion prompt” line, but each content slide includes a question-form bullet → A3 can be full credit (5).
+- Case B: Web link only, no PPTX file → A1 = 0 and apply N1 (-30). If a PPTX export is provided and opens, grade normally.
+- Case C: Procurement/ethics language is only “we’ll follow County rules” → C4 should receive partial credit (1), not full.
+- Case D: 6–7 bullets per slide but still legible → A4 can still be 1 if skimmable; F1/F2 can be full if genuinely readable and well-laid-out.
+- N7 application reminder: Do the pre-check and render to temp; do not penalize files created by the grader during inspection.

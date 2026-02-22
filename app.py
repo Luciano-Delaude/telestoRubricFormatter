@@ -296,17 +296,19 @@ def group_items(items: List[RubricItem]) -> Dict[str, List[RubricItem]]:
 def format_output(
     items: List[RubricItem],
     scores: Dict[str, float],
+    max_scores: Dict[str, float],
     explanations: Dict[str, str],
 ) -> str:
     lines: List[str] = []
     total_obtained = sum(scores.get(item.code, 0.0) for item in items)
-    total_possible = sum(item.max_points for item in items)
+    total_possible = sum(max_scores.get(item.code, 0.0) for item in items)
     lines.append(f"Total: {total_obtained:g}/{total_possible:g}")
     lines.append("")
     for item in items:
         score = scores.get(item.code, 0.0)
+        max_score = max_scores.get(item.code, 0.0)
         explanation = explanations.get(item.code, "").strip()
-        score_display = f"{score:g}/{item.max_points:g}"
+        score_display = f"{score:g}/{max_score:g}"
         lines.append(f"{item.code}: {score_display}")
         lines.append(f"Explanation: {explanation}")
         lines.append("")
@@ -399,6 +401,7 @@ if not items:
 
 grouped = group_items(items)
 scores: Dict[str, float] = {}
+max_scores: Dict[str, float] = {}
 explanations: Dict[str, str] = {}
 
 st.caption(f"Detected {len(items)} rubric items across {len(grouped)} sections.")
@@ -452,21 +455,6 @@ def _extract_score_bullets(text: str) -> Tuple[List[str], str]:
     return bullets, rest
 
 
-def _extract_score_values(bullets: List[str]) -> List[float]:
-    values: List[float] = []
-    seen: set[float] = set()
-    for bullet in bullets:
-        match = re.match(r"^-?\s*(\d+(?:\.\d+)?)\s*:", bullet.strip())
-        if not match:
-            continue
-        value = float(match.group(1))
-        if value in seen:
-            continue
-        seen.add(value)
-        values.append(value)
-    return values
-
-
 for section, section_items in grouped.items():
     section_title = sections.get(section, "").strip()
     heading = f"Section {section}"
@@ -481,64 +469,69 @@ for section, section_items in grouped.items():
             rendered_ranges.add(block.header)
         with st.container(border=True):
             st.markdown(f"**{item.code}** — {item.description}")
-            item_bullets, item_details = _extract_score_bullets(item.details)
-            inherited_bullets, inherited_details = inherited_scoring.get(
-                item.code, ([], "")
-            )
-            range_bullets, range_details = ([], "")
-            if block:
-                range_bullets, range_details = _extract_score_bullets(block.details)
-
-            display_bullets = item_bullets or range_bullets or inherited_bullets
+            item_details = item.details.strip()
+            inherited_details = inherited_scoring.get(item.code, ([], ""))[1]
+            range_details = block.details.strip() if block else ""
             display_details = item_details or range_details or inherited_details
 
             if display_details:
                 st.caption(display_details)
-            if display_bullets:
-                st.markdown("\n".join([f"- {bullet}" for bullet in display_bullets]))
-            st.caption(f"Max points: {item.max_points:g}")
-            score_options = _extract_score_values(display_bullets)
-            all_points = st.radio(
-                f"{item.code} rating mode",
-                options=["All points", "Adjust score"],
-                horizontal=True,
-                key=f"mode_{item.code}",
-            )
-            if all_points == "All points":
-                score = float(item.max_points)
-                explanation = ""
-            else:
-                if score_options:
-                    default_idx = 0
-                    if float(item.max_points) in score_options:
-                        default_idx = score_options.index(float(item.max_points))
-                    score = st.selectbox(
-                        f"{item.code} score",
-                        options=score_options,
-                        index=default_idx,
-                        key=f"score_{item.code}",
-                    )
-                else:
-                    score = st.number_input(
-                        f"{item.code} score",
-                        min_value=0.0,
-                        max_value=float(item.max_points),
-                        value=float(item.max_points),
-                        step=0.25,
-                        key=f"score_{item.code}",
-                    )
-                explanation = st.text_area(
-                    f"{item.code} explanation",
-                    placeholder="Add a short justification for deducted points.",
-                    key=f"explain_{item.code}",
+
+            score_col, max_col = st.columns(2)
+            with score_col:
+                score_text = st.text_input(
+                    f"{item.code} score",
+                    value="",
+                    placeholder="Enter score",
+                    key=f"score_{item.code}",
+                ).strip()
+            with max_col:
+                max_score_text = st.text_input(
+                    f"{item.code} max score",
+                    value="",
+                    placeholder=f"Enter max score (e.g. {item.max_points:g})",
+                    key=f"max_score_{item.code}",
+                ).strip()
+
+            score_value = 0.0
+            max_score_value = 0.0
+
+            if score_text:
+                try:
+                    score_value = float(score_text)
+                except ValueError:
+                    st.warning(f"{item.code}: score must be a number.")
+            if max_score_text:
+                try:
+                    max_score_value = float(max_score_text)
+                except ValueError:
+                    st.warning(f"{item.code}: max score must be a number.")
+
+            if score_value < 0:
+                st.warning(f"{item.code}: score cannot be negative.")
+                score_value = 0.0
+            if max_score_value < 0:
+                st.warning(f"{item.code}: max score cannot be negative.")
+                max_score_value = 0.0
+            if max_score_value > 0 and score_value > max_score_value:
+                st.warning(
+                    f"{item.code}: score is greater than max score; it will be capped."
                 )
-            scores[item.code] = score
+                score_value = max_score_value
+
+            explanation = st.text_area(
+                f"{item.code} explanation",
+                placeholder="Optional justification.",
+                key=f"explain_{item.code}",
+            )
+            scores[item.code] = score_value
+            max_scores[item.code] = max_score_value
             explanations[item.code] = explanation
 
 st.divider()
-output_text = format_output(items, scores, explanations)
+output_text = format_output(items, scores, max_scores, explanations)
 total_obtained = sum(scores.get(item.code, 0.0) for item in items)
-total_possible = sum(item.max_points for item in items)
+total_possible = sum(max_scores.get(item.code, 0.0) for item in items)
 total_display = f"{total_obtained:g}/{total_possible:g}"
 
 with col_right:
